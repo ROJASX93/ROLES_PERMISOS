@@ -31,7 +31,9 @@ namespace ROLES_PERMISOS_ESCRITORIO
 
             if (idUsuario != 0)
             {
-                MessageBox.Show("Bienvenido");
+                this.Hide();
+                MDI_Master master = new MDI_Master(idUsuario);
+                master.Show();
             }
 
             else
