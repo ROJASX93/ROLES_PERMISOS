@@ -64,14 +64,23 @@ namespace ROLES_PERMISOS_ESCRITORIO
             else
             {
                 Form FormularioCreado = (Form)Activator.CreateInstance(elemento);
-                FormularioCreado.MdiParent = this;
-                FormularioCreado.Show();
+                int encontrado = this.MdiChildren.Where(p => p.Name.Equals(FormularioCreado.Name)).ToList().Count();
+
+                if (encontrado.Equals(0))
+                {
+                    FormularioCreado.MdiParent = this;
+                    FormularioCreado.Show();
+                }
+                else
+                {
+                    ((Form)(this.MdiChildren.Where(p => p.Name.Equals(FormularioCreado.Name)).FirstOrDefault())).WindowState = FormWindowState.Normal;
+                    ((Form)(this.MdiChildren.Where(p => p.Name.Equals(FormularioCreado.Name)).FirstOrDefault())).Activate();
+                }
+
+                
             }
 
-            //frmCrearUsuario
-            //frmEditarUsuario
 
-            MessageBox.Show(menuSeleccionado.Name);
         }
 
 
